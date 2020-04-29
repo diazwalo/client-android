@@ -9,7 +9,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONObject;
+
 public class LoginActivity extends AppCompatActivity {
+    private String urlCompleted = null;
+    private boolean authentSuccess = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,26 +28,32 @@ public class LoginActivity extends AppCompatActivity {
         String password = ((EditText)(findViewById(R.id.password))).getText().toString();
 
         if(login != null &&  password != null) {
-            Connection.askServer(this, new String[]{"authent", login, password});
 
-            wrongLoginAction(Connection.responseString);
+            urlCompleted = Connection.askServer(this, new String[]{"authent", login, password});
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        JSONObject json = JsonReader.readJsonFromUrl(urlCompleted);
+                        if(json != null && (boolean)json.get("authent")) {
+                            authentSuccess = true;
+                            Intent intent=new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                            return;
+                        }
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+
+            wrongLoginAction(null);
         }
-
-        /*Intent intent=new Intent(LoginActivity.this, HomeActivity.class);
-        startActivity(intent);
-        finish();*/
     }
 
     protected void wrongLoginAction(String message) {
-        Context context = getApplicationContext();
-        CharSequence text = ""+R.string.login_failed;
-        if(message != null) {
-            text = "" + message;
-        }
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
+        Toast.makeText(this, "Invalid Login or Password", Toast.LENGTH_SHORT).show();
     }
 }

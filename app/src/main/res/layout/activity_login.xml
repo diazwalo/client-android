@@ -29,7 +29,6 @@
         android:layout_marginBottom="104dp"
         android:background="@drawable/radius_button"
         android:onClick="onClicSubmit"
-        android:text="Submit"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#FFFFFF"
         android:textSize="16sp"

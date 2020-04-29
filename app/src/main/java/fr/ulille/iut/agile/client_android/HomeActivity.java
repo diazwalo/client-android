@@ -15,6 +15,5 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        Connection.onStop();
     }
 }

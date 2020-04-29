@@ -7,34 +7,22 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 public class Connection {
     private final static String url = "http://10.0.2.2:8080/api/v1";
-    public static String responseString = null;
-    public static String errorString = null;
-    private static RequestQueue queue;
+    public static String urlCompleted = null;
 
-    public static void askServer(Context context, String[] parameters) {
-        queue = Volley.newRequestQueue(context);
+    public static String askServer(Context context, String[] parameters) {
+        urlCompleted = Connection.url;
 
-        responseString = null;
-        errorString = null;
-
-        String urlCompleted = Connection.url;
         for (int idx = 0; idx < parameters.length; idx++) {
             urlCompleted += "/" + parameters[idx];
         }
 
-        StringRequest request = new StringRequest(Request.Method.GET, urlCompleted,
-                (response) -> Connection.responseString = response,
-                (error) -> Connection.errorString = error.toString());
-
-        request.setTag("VOLLEY");
-        queue.add(request);
-    }
-
-    public static void onStop() {
-        if (queue != null) {
-            queue.cancelAll("VOLLEY");
-        }
+        return urlCompleted;
     }
 }
