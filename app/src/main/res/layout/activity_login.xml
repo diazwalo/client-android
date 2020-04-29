@@ -11,7 +11,7 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="56dp"
         android:buttonTint="#91b508"
         android:text="Remember me"
         android:textColor="#73c0e0"
@@ -19,14 +19,14 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintHorizontal_bias="0.846"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="151dp"
         android:layout_height="39dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="104dp"
         android:background="@drawable/radius_button"
         android:onClick="onClicSubmit"
         android:text="Submit"
@@ -94,15 +94,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="229dp"
-        android:layout_height="199dp"
+        android:id="@+id/imageView3"
+        android:layout_width="394dp"
+        android:layout_height="202dp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@drawable/logo_green_water_crop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
