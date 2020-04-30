@@ -6,36 +6,58 @@
     android:layout_height="match_parent"
     tools:context="fr.ulille.iut.agile.client_android.HomeActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="361dp"
+        android:layout_height="122dp"
+        android:background="@drawable/radius_input"
+        android:drawableLeft="@drawable/home_cuve_button"
+        android:drawablePadding="10dp"
+        android:text="Calcule dimension de la cuve"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/button14"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_foreground" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:text="Ici plein de BoutonsImages"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pour naviguer entre les diffs fn,ctalités"
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="361dp"
+        android:layout_height="122dp"
+        android:background="@drawable/radius_input"
+        android:drawableLeft="@drawable/home_dash_button"
+        android:drawablePadding="10dp"
+        android:text="DashBoard"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.136" />
+        app:layout_constraintTop_toBottomOf="@+id/button14"
+        app:layout_constraintVertical_bias="0.27" />
+
+    <Button
+        android:id="@+id/button14"
+        android:layout_width="361dp"
+        android:layout_height="122dp"
+        android:background="@drawable/radius_input"
+        android:drawableLeft="@drawable/home_wall_button"
+        android:drawablePadding="10dp"
+        android:text="Calcule dimension du mur"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.623" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="441dp"
+        android:layout_height="202dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/green_wall" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
