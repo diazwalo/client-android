@@ -2,15 +2,11 @@ package fr.ulille.iut.agile.client_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if(login != null &&  password != null) {
 
-            urlCompleted = Connection.askServer(this, new String[]{"authent", login, password});
+            urlCompleted = Connection.askServer(new String[]{"authent", login, password});
 
             new Thread(new Runnable() {
                 @Override
@@ -52,15 +48,13 @@ public class LoginActivity extends AppCompatActivity {
     private void askServerLogin() throws IOException, JSONException {
         JSONObject json = JsonReader.readJsonFromUrl(urlCompleted);
         if(json != null && (boolean)json.get("authent")) {
-            Intent intent=new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
+            ActivitySwitcher.switchActivity(this, HomeActivity.class, true);
         }else {
-            wrongLoginAction("Invalid Login or Password");
-        }
+            wrongLoginAction(getResources().getString(R.string.login_failed));
+    }
     }
 
     protected void wrongLoginAction(String message) {
-        Toast.makeText(this, "Invalid Login or Password", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
