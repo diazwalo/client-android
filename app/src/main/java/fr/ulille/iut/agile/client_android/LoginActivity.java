@@ -5,17 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
     private String urlCompleted = null;
-    private boolean authentSuccess = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +37,26 @@ public class LoginActivity extends AppCompatActivity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    Looper.prepare();
                     try {
-                        JSONObject json = JsonReader.readJsonFromUrl(urlCompleted);
-                        if(json != null && (boolean)json.get("authent")) {
-                            authentSuccess = true;
-                            Intent intent=new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivity(intent);
-                            finish();
-                            return;
-                        }
+                        askServerLogin();
                     }catch (Exception e) {
                         e.printStackTrace();
                     }
+                    Looper.loop();
                 }
             }).start();
+        }
+    }
 
-            wrongLoginAction(null);
+    private void askServerLogin() throws IOException, JSONException {
+        JSONObject json = JsonReader.readJsonFromUrl(urlCompleted);
+        if(json != null && (boolean)json.get("authent")) {
+            Intent intent=new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            wrongLoginAction("Invalid Login or Password");
         }
     }
 
