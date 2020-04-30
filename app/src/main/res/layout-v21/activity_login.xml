@@ -43,15 +43,16 @@
         android:layout_width="321dp"
         android:layout_height="41dp"
         android:layout_marginBottom="24dp"
+        android:autofillHints=""
         android:background="@drawable/radius_input"
         android:ems="10"
+        android:hint="@string/hint_text"
         android:inputType="textPersonName"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
@@ -70,8 +71,10 @@
         android:layout_width="320dp"
         android:layout_height="41dp"
         android:layout_marginBottom="8dp"
+        android:autofillHints=""
         android:background="@drawable/radius_input"
         android:ems="10"
+        android:hint="@string/hint_text"
         android:inputType="textPassword"
         android:shadowColor="#FFFFFF"
         android:singleLine="false"
@@ -80,8 +83,7 @@
         app:layout_constraintBottom_toTopOf="@+id/rememberMe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"

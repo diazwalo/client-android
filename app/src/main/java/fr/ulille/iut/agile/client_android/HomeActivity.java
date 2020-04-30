@@ -19,14 +19,14 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void onClickTank(View view) {
-
+        ActivitySwitcher.switchActivity(this, TankActivity.class, false);
     }
 
-    public void onClickWaterTrigger(View view) {
-
+    public void onClickArea(View view) {
+        ActivitySwitcher.switchActivity(this, AreaActivity.class, false);
     }
 
     public void onClickDashboard(View view) {
-
+        ActivitySwitcher.switchActivity(this, DashboardActivity.class, false);
     }
 }
