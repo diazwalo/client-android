@@ -18,4 +18,8 @@
     <string name="login_label_login">Login</string>
     <string name="login_label_password">Password</string>
     <string name="hint_text"> </string>
+    <string name="tank_label_conso">Consomation journalière (en litre)</string>
+    <string name="tank_label_ville">Ville</string>
+    <string name="tank_label_res">Resultat : </string>
+    <string name="tank_button_calculer">Calculer</string>
 </resources>

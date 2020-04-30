@@ -3,7 +3,7 @@ package fr.ulille.iut.agile.client_android;
 import android.content.Context;
 
 public class Connection {
-    private final static String url = "http://10.0.2.2:8080/api/v1";
+    private final static String url = "https://groupe4.azae.eu/api/v1/";
     public static String urlCompleted = null;
 
     public static String askServer(String[] parameters) {
