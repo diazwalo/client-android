@@ -56,6 +56,7 @@ public class AreaActivity extends AppCompatActivity {
         if(json != null) {
             String jsonConsoVal = json.get("conso").toString();
             if(jsonConsoVal.equals("ville incorrecte") || jsonConsoVal.equals("parametres incorrectes")) {
+                ((TextView)findViewById(R.id.resultat_area)).setText(getResources().getString(R.string.label_res));
                 ToastPrinter.printToast(this, jsonConsoVal);
             }else {
                 double valConso = Double.parseDouble(jsonConsoVal);
@@ -63,7 +64,7 @@ public class AreaActivity extends AppCompatActivity {
                 ((TextView)findViewById(R.id.resultat_area)).setText(getResources().getString(R.string.label_res) + " " + DecimalTruncator.truncateDecimal(valConso, 2).toString() + " Litres");
             }
         }else {
-            ((TextView)findViewById(R.id.resultat_tank)).setText(getResources().getString(R.string.label_res));
+            ((TextView)findViewById(R.id.resultat_area)).setText(getResources().getString(R.string.label_res));
             ToastPrinter.printToast(this, "Error Connection...");
         }
     }

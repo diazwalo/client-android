@@ -55,10 +55,10 @@ public class TankActivity extends AppCompatActivity {
         if(json != null) {
             String jsonStokageVal = json.get("stockage").toString();
             if(jsonStokageVal.equals("ville incorrecte") || jsonStokageVal.equals("parametres incorrectes")) {
+                ((TextView)findViewById(R.id.resultat_tank)).setText(getResources().getString(R.string.label_res));
                 ToastPrinter.printToast(this, jsonStokageVal);
             }else {
                 double valStockage = Double.parseDouble(jsonStokageVal);
-
                 ((TextView)findViewById(R.id.resultat_tank)).setText(getResources().getString(R.string.label_res) + " " + DecimalTruncator.truncateDecimal(valStockage, 2).toString() + " m3");
             }
         }else {
