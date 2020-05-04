@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">client-android</string>
+    <string name="app_name">GreenWater</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
@@ -24,4 +24,5 @@
     <string name="label_res">Resultat : </string>
     <string name="tank_button_calculer">Calculer</string>
     <string name="area_label_dimension_mur">Dimension du mur</string>
+    <string name="dashboard_button_vider">Vider</string>
 </resources>

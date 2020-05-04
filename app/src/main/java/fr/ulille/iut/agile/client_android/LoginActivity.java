@@ -57,8 +57,4 @@ public class LoginActivity extends AppCompatActivity {
             ToastPrinter.printToast(this, getResources().getString(R.string.login_failed));
         }
     }
-
-    /*protected void wrongLoginAction(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }*/
 }
