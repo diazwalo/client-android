@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+/**
+ * Class qui sert à rediriger vers d'autre Activity lorsque l'utilisateur appuie sur un bouton
+ */
 public class HomeActivity extends AppCompatActivity {
 
     @Override

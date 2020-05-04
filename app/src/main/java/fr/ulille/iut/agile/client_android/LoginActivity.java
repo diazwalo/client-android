@@ -13,6 +13,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+/**
+ * Class verifiant la saisie du login et du mot de passe de l'utilisateur
+ * Soit il est redirigé vers l'accueil
+ * Soit on lui affiche qu'il n'a pas reussi à s'authentifier
+ */
 public class LoginActivity extends AppCompatActivity {
     private String urlCompleted = null;
 
@@ -51,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             ActivitySwitcher.switchActivity(this, HomeActivity.class, true);
         }else {
             wrongLoginAction(getResources().getString(R.string.login_failed));
-    }
+        }
     }
 
     protected void wrongLoginAction(String message) {

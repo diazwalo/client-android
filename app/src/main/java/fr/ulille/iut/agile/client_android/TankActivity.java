@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * Class permetant de saisir les données relative au calcule de la taille de la cuve
+ */
 public class TankActivity extends AppCompatActivity {
 
     @Override
