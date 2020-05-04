@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if(login != null &&  password != null) {
 
-            urlCompleted = Connection.askServer(new String[]{"authent", login, password});
+            urlCompleted = Connection.constructServerURL(new String[]{"authent", login, password});
 
             new Thread(new Runnable() {
                 @Override
@@ -55,11 +54,11 @@ public class LoginActivity extends AppCompatActivity {
         if(json != null && (boolean)json.get("authent")) {
             ActivitySwitcher.switchActivity(this, HomeActivity.class, true);
         }else {
-            wrongLoginAction(getResources().getString(R.string.login_failed));
+            ToastPrinter.printToast(this, getResources().getString(R.string.login_failed));
         }
     }
 
-    protected void wrongLoginAction(String message) {
+    /*protected void wrongLoginAction(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
+    }*/
 }

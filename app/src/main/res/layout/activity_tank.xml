@@ -7,7 +7,7 @@
     tools:context="fr.ulille.iut.agile.client_android.TankActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/tank_button_calculer"
         android:layout_width="151dp"
         android:layout_height="39dp"
         android:background="@drawable/radius_button"
@@ -31,13 +31,13 @@
         android:background="@drawable/radius_input"
         android:ems="10"
         android:hint="@string/hint_text"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/tank_label_conso"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
@@ -54,11 +54,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/area_label_ville"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/area_label_ville"
         android:layout_width="111dp"
         android:layout_height="23dp"
         android:text="@string/tank_label_ville"
@@ -72,7 +72,7 @@
         app:layout_constraintVertical_bias="0.083" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tank_label_conso"
         android:layout_width="253dp"
         android:layout_height="24dp"
         android:text="@string/tank_label_conso"
@@ -82,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.278"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultat"
+        app:layout_constraintTop_toBottomOf="@+id/resultat_tank"
         app:layout_constraintVertical_bias="0.119" />
 
     <ImageView
@@ -116,12 +116,12 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/resultat"
-        android:layout_width="208dp"
-        android:layout_height="45dp"
+        android:id="@+id/resultat_tank"
+        android:layout_width="266dp"
+        android:layout_height="46dp"
         android:background="@drawable/radius_input"
         android:gravity="center"
-        android:text="@string/tank_label_res"
+        android:text="@string/label_res"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

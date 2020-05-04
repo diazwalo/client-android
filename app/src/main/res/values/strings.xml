@@ -20,6 +20,7 @@
     <string name="hint_text"> </string>
     <string name="tank_label_conso">Consomation journalière (en litre)</string>
     <string name="tank_label_ville">Ville</string>
-    <string name="tank_label_res">Resultat : </string>
+    <string name="label_res">Resultat : </string>
     <string name="tank_button_calculer">Calculer</string>
+    <string name="area_label_dimension_mur">Dimension du mur</string>
 </resources>
