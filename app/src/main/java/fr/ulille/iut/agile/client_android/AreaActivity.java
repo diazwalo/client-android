@@ -13,12 +13,15 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.logging.Logger;
 
 /**
  * Class permetant de saisir les données relative au calcule consomation d'eau
  */
 public class AreaActivity extends AppCompatActivity {
     private String urlCompleted = null;
+    private static final Logger LOGGER = Logger.getLogger(AreaActivity.class.getName());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class AreaActivity extends AppCompatActivity {
                     try {
                         askServerTank();
                     }catch (Exception e) {
-                        e.printStackTrace();
+                        LOGGER.severe(e.getMessage());
                     }
                     Looper.loop();
                 }
