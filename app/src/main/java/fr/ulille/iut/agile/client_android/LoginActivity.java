@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * Class verifiant la saisie du login et du mot de passe de l'utilisateur
@@ -19,6 +20,7 @@ import java.io.IOException;
  */
 public class LoginActivity extends AppCompatActivity {
     private String urlCompleted = null;
+    private static final Logger LOGGER = Logger.getLogger(AreaActivity.class.getName());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         askServerLogin();
                     }catch (Exception e) {
-                        e.printStackTrace();
+                        LOGGER.severe(e.getMessage());
                     }
                     Looper.loop();
                 }

@@ -13,12 +13,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.logging.Logger;
 
 /**
  * Class permetant de saisir les données relative au calcule de la taille de la cuve
  */
 public class TankActivity extends AppCompatActivity {
     private String urlCompleted = null;
+    private static final Logger LOGGER = Logger.getLogger(TankActivity.class.getName());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class TankActivity extends AppCompatActivity {
                     try {
                         askServerTank();
                     }catch (Exception e) {
-                        e.printStackTrace();
+                        LOGGER.severe(e.getMessage());
                     }
                     Looper.loop();
                 }
