@@ -27,6 +27,7 @@ public class DashboardActivity extends AppCompatActivity {
     private static Double temp = null;
     private static String description = null;
     private static String icone = null;
+    private static final Logger LOGGER = Logger.getLogger(DashboardActivity.class.getName());
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -67,7 +68,7 @@ public class DashboardActivity extends AppCompatActivity {
                 try {
                     askMeteo(urlJsonv2);
                 }catch (Exception e) {
-                    e.printStackTrace();
+                    LOGGER.log(Level.WARNING, e.getMessage());
                 }
                 Looper.loop();
             }
@@ -89,7 +90,7 @@ public class DashboardActivity extends AppCompatActivity {
                 //tvTemperature.setText("Température: " + Math.round(temp) + "°C");
                 //tvMeteo.setText("Météo: " + description);
             }catch(JSONException e) {
-                Logger.getLogger("global").log(Level.WARNING, e.getMessage());
+                LOGGER.log(Level.WARNING, e.getMessage());
             }
         }else {
             ToastPrinter.printToast(this, ("Error Network Connection"));
