@@ -12,7 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.math.BigDecimal;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -63,6 +63,7 @@ public class AreaActivity extends AppCompatActivity {
                 ToastPrinter.printToast(this, jsonConsoVal);
             }else {
                 double valConso = Double.parseDouble(jsonConsoVal);
+                
                 ((TextView)findViewById(R.id.resultat_area)).setText(getResources().getString(R.string.label_res) + " " + DecimalTruncator.truncateDecimal(valConso, 2).toString() + " Litres");
             }
         }else {

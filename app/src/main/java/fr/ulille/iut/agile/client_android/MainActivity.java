@@ -13,13 +13,12 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 
 /**
  * Class affichant l'icon de GreenWater pendant X secondes
  */
 public class MainActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT=1500;
+    private static final int SPLASH_TIME_OUT=1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

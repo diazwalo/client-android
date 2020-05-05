@@ -168,9 +168,10 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
                 JSONArray arrayOfDays = json.getJSONArray("list");
                 JSONObject dayOne = arrayOfDays.getJSONObject(0);
                 JSONObject meteo = dayOne.getJSONObject("main");
-                DashboardActivity.temp = meteo.getDouble("temp");
+                temp = meteo.getDouble("temp");
                 JSONArray array = dayOne.getJSONArray("weather");
                 JSONObject object = array.getJSONObject(0);
+
                 DashboardActivity.description = object.getString("description");
                 String icone = object.getString("icon");
 
@@ -190,7 +191,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
 
                 //tvTemperature.setText("Température: " + Math.round(temp) + "°C");
             }catch(JSONException e) {
-                Logger.getLogger("global").log(Level.WARNING, e.getMessage());
+                e.printStackTrace();
             }
         }else {
             ToastPrinter.printToast(this, ("Error Network Connection"));

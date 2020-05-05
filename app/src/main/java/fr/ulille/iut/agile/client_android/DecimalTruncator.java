@@ -3,6 +3,11 @@ package fr.ulille.iut.agile.client_android;
 import java.math.BigDecimal;
 
 public class DecimalTruncator {
+
+    private DecimalTruncator() {
+        throw new IllegalStateException("Do not use this constructor");
+    }
+
     public static BigDecimal truncateDecimal(double x, int numberofDecimals)
     {
         if ( x > 0) {

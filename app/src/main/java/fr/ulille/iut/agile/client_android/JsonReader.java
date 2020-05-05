@@ -12,6 +12,10 @@ import org.json.JSONObject;
 
 public class JsonReader {
 
+    private JsonReader() {
+        throw new IllegalStateException("Do not use this constructor");
+    }
+
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
@@ -26,8 +30,7 @@ public class JsonReader {
 
         try (BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")))) {
             String jsonText = readAll(rd);
-            JSONObject json = new JSONObject(jsonText);
-            return json;
+            return new JSONObject(jsonText);
         }
     }
 }
