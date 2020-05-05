@@ -8,12 +8,12 @@ public class Connection {
     }
 
     public static String constructServerURL(String[] parameters) {
-        String urlCompleted = Connection.URL;
+        StringBuilder urlCompletedBuilder = new StringBuilder(Connection.URL);
 
         for (int idx = 0; idx < parameters.length; idx++) {
-            urlCompleted += "/" + parameters[idx];
+            urlCompletedBuilder.append("/").append(parameters[idx]);
         }
 
-        return urlCompleted;
+        return urlCompletedBuilder.toString();
     }
 }
