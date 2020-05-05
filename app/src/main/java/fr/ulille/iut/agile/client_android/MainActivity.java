@@ -18,7 +18,7 @@ import android.os.Handler;
  * Class affichant l'icon de GreenWater pendant X secondes
  */
 public class MainActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT=1500;
+    private static final int SPLASH_TIME_OUT=1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
