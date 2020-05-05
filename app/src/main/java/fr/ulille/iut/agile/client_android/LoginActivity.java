@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class LoginActivity extends AppCompatActivity {
     private String urlCompleted = null;
-    private static final Logger LOGGER = Logger.getLogger(AreaActivity.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(LoginActivity.class.getName());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
