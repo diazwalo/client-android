@@ -12,7 +12,7 @@
     <string name="login_failed">Invalid Login or Password</string>
     <string name="home_button_cuve">Calcule dimension de la cuve</string>
     <string name="home_button_mur">Calcule dimension du mur</string>
-    <string name="home_button_conso">Calcule de la consomation d\'eau</string>
+    <string name="home_button_conso">Calcule d\'auto-sufisance de l\'eau</string>
     <string name="home_button_dashboard">DashBoard</string>
     <string name="login_ckeckbox_remember">Remember me</string>
     <string name="login_button_submit">Submit</string>
@@ -25,4 +25,7 @@
     <string name="tank_button_calculer">Calculer</string>
     <string name="area_label_dimension_mur">Dimension du mur</string>
     <string name="dashboard_button_vider">Vider</string>
+    <string name="dashboard_label_date">Date : ...</string>
+    <string name="dashboard_label_ville">Ville : ...</string>
+    <string name="dashboard_image_meteo">Icone Meteo</string>
 </resources>

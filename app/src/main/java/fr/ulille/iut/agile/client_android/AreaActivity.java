@@ -63,7 +63,6 @@ public class AreaActivity extends AppCompatActivity {
                 ToastPrinter.printToast(this, jsonConsoVal);
             }else {
                 double valConso = Double.parseDouble(jsonConsoVal);
-                System.out.println("VAL CONSO : " +valConso);
                 ((TextView)findViewById(R.id.resultat_area)).setText(getResources().getString(R.string.label_res) + " " + DecimalTruncator.truncateDecimal(valConso, 2).toString() + " Litres");
             }
         }else {
