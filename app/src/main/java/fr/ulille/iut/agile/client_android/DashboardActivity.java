@@ -54,7 +54,7 @@ public class DashboardActivity extends AppCompatActivity {
         if(icone != null) {
             Picasso.with(this).load("http://openweathermap.org/img/wn/" + icone + "@2x.png").into(((ImageView) findViewById(R.id.dashboard_image_meteo)));
         }
-        System.out.println("Icone : " + icone);
+        LOGGER.info("Icone : " + icone);
     }
 
     public void findWeather(String paysVille) {
