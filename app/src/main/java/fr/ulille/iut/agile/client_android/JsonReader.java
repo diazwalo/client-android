@@ -12,6 +12,11 @@ import org.json.JSONObject;
 
 public class JsonReader {
 
+    private JsonReader() {
+        throw new IllegalStateException("Do not use this constructor");
+    }
+
+
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
