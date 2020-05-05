@@ -24,9 +24,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DashboardActivity extends AppCompatActivity {
-    private static Double temp = null;
-    private static String description = null;
-    private static String icone = null;
+    private Double temp = null;
+    private String description = null;
+    private String icone = null;
     private static final Logger LOGGER = Logger.getLogger(DashboardActivity.class.getName());
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -82,11 +82,11 @@ public class DashboardActivity extends AppCompatActivity {
                 JSONArray arrayOfDays = json.getJSONArray("list");
                 JSONObject dayOne = arrayOfDays.getJSONObject(0);
                 JSONObject meteo = dayOne.getJSONObject("main");
-                DashboardActivity.temp = meteo.getDouble("temp");
+                temp = meteo.getDouble("temp");
                 JSONArray array = dayOne.getJSONArray("weather");
                 JSONObject object = array.getJSONObject(0);
-                DashboardActivity.description = object.getString("description");
-                DashboardActivity.icone = object.getString("icon");
+                description = object.getString("description");
+                icone = object.getString("icon");
                 //tvTemperature.setText("Température: " + Math.round(temp) + "°C");
                 //tvMeteo.setText("Météo: " + description);
             }catch(JSONException e) {
