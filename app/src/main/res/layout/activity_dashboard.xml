@@ -18,7 +18,6 @@
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_header4"
         app:layout_constraintVertical_bias="0.0" />
@@ -59,32 +58,32 @@
         android:text="@string/dashboard_label_date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dashboard_image_meteo"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.238"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_button_cuve3"
         app:layout_constraintVertical_bias="0.029" />
 
     <TextView
         android:id="@+id/dashboard_label_ville"
-        android:layout_width="200dp"
-        android:layout_height="44dp"
+        android:layout_width="196dp"
+        android:layout_height="49dp"
         android:text="@string/dashboard_label_ville"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dashboard_image_meteo"
-        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintHorizontal_bias="0.246"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_button_cuve3"
-        app:layout_constraintVertical_bias="0.174" />
+        app:layout_constraintVertical_bias="0.191" />
 
     <ImageView
         android:id="@+id/dashboard_image_meteo"
         android:layout_width="105dp"
         android:layout_height="103dp"
-        android:background="@drawable/radius_input"
+        android:background="@color/colorAccent"
         android:contentDescription="@string/dashboard_image_meteo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_button_cuve3"
         app:layout_constraintVertical_bias="0.034" />

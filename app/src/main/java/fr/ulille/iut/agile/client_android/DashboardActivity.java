@@ -43,8 +43,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DashboardActivity extends AppCompatActivity implements LocationListener {
-    private static Double temp = null;
-    private static String description = null;
     private Location location = null;
     public static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 1;
     protected static final String[] NEEDED_PERMISSION = new String[] {Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -52,34 +50,45 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     private LocationManager locationManager;
     private String provider;
 
+    private String finalAddress = null;
+    private Double temp = null;
+    private String description = null;
+
     private ImageView imageMeteo = null;
     private TextView addressField;
+    private TextView tvDate = null;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        fetchLocation();
-
         this.addressField = findViewById(R.id.dashboard_label_ville);
+        this.tvDate = (TextView) findViewById(R.id.dashboard_label_date);
         this.imageMeteo = findViewById(R.id.dashboard_image_meteo);
 
+        fetchLocation();
+
+        if (initLocation()) return;
+
+        updateGeoAndWeather();
+    }
+
+    private boolean initLocation() {
         this.locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         Criteria criteria = new Criteria();
         this.provider = locationManager.getBestProvider(criteria, false);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
+            return true;
         }
         location = locationManager.getLastKnownLocation(provider);
 
         if (location != null) {
             onLocationChanged(location);
         }
-
-        updateGeoAndWeather();
+        return false;
     }
 
     @Override
@@ -112,9 +121,9 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
             String addressStr = address.get(0).getLocality();
             builder.append(addressStr);
 
-            String fnialAddress = builder.toString(); //This is the complete address.
+            finalAddress = builder.toString(); //This is the complete address.
 
-            addressField.setText(fnialAddress); //This will display the final address.
+            addressField.setText(finalAddress); //This will display the final address.
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -143,8 +152,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     }
 
     public void findWeather(/*String paysVille*/) {
-        String urlJsonv2 = "http://api.openweathermap.org/data/2.5/forecast?q="+/*paysVille*/addressField.getText().toString()+"&appid=9d629e64ec22ad1b004eb79cc0ec3895&cnt=5&mode=json&units=metric&lang=fr"; // Un "cnt" = 3 heures
-        System.out.println(urlJsonv2);
+        String urlJsonv2 = "http://api.openweathermap.org/data/2.5/forecast?q="+finalAddress+"&appid=9d629e64ec22ad1b004eb79cc0ec3895&cnt=5&mode=json&units=metric&lang=fr"; // Un "cnt" = 3 heures
 
         new Thread(new Runnable() {
             @Override
@@ -168,11 +176,15 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
                 JSONArray arrayOfDays = json.getJSONArray("list");
                 JSONObject dayOne = arrayOfDays.getJSONObject(0);
                 JSONObject meteo = dayOne.getJSONObject("main");
-                temp = meteo.getDouble("temp");
+
+                //Non utilisé
+                this.temp = meteo.getDouble("temp");
                 JSONArray array = dayOne.getJSONArray("weather");
                 JSONObject object = array.getJSONObject(0);
 
-                DashboardActivity.description = object.getString("description");
+                //Non utilisé
+                this.description = object.getString("description");
+
                 String icone = object.getString("icon");
 
                 Handler uiHandler = new Handler(Looper.getMainLooper());
@@ -184,12 +196,9 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
                                 .load("http://openweathermap.org/img/wn/" + icone + "@2x.png").into(imageMeteo);
 
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E dd MMMM yyyy", new Locale("fr", "FR"));
-                        TextView tvDate = (TextView) findViewById(R.id.dashboard_label_date);
                         tvDate.setText(simpleDateFormat.format(new Date()));
                     }
                 });
-
-                //tvTemperature.setText("Température: " + Math.round(temp) + "°C");
             }catch(JSONException e) {
                 e.printStackTrace();
             }
