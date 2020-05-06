@@ -58,6 +58,8 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     private TextView addressField;
     private TextView tvDate = null;
 
+    private static final Logger LOGGER = Logger.getLogger(DashboardActivity.class.getName());
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
