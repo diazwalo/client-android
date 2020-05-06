@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import static android.os.Environment.getExternalStorageDirectory;
 
@@ -20,6 +21,8 @@ import static android.os.Environment.getExternalStorageDirectory;
  */
 public class MainActivity extends AppCompatActivity {
     String urlCompleted = null;
+
+    private static final Logger LOGGER = Logger.getLogger(TankActivity.class.getName());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 br.close();
                 this.VerifyLoginPassword(login, password);
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.severe(e.getMessage());
             }
         } else {
             ActivitySwitcher.switchActivity(this, LoginActivity.class, true);
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         askServerLogin();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        LOGGER.severe(e.getMessage());
                     }
                     Looper.loop();
                 }

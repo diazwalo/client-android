@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 /**
  * Class Affichant les information sur la meteo, la geolocalisation
@@ -55,6 +56,8 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     private ImageView imageMeteo = null;
     private TextView addressField;
     private TextView tvDate = null;
+
+    private static final Logger LOGGER = Logger.getLogger(TankActivity.class.getName());
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -129,9 +132,9 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
             addressField.setText(finalAddress); // This will display the final address.
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }
     }
 
@@ -167,7 +170,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
                 try {
                     askMeteo(urlJsonv2);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOGGER.severe(e.getMessage());
                 }
                 Looper.loop();
             }
@@ -207,7 +210,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
                     }
                 });
             } catch (JSONException e) {
-                e.printStackTrace();
+                LOGGER.severe(e.getMessage());
             }
         } else {
             ToastPrinter.printToast(this, ("Error Network Connection"));

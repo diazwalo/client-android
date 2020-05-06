@@ -16,6 +16,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import static android.os.Environment.getExternalStorageDirectory;
 
@@ -30,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tv_login = null;
     private TextView tv_password = null;
     private CheckBox cb_RememberMe = null;
+
+    private static final Logger LOGGER = Logger.getLogger(LoginActivity.class.getName());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         askServerLogin();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        LOGGER.severe(e.getMessage());
                     }
                     Looper.loop();
                 }
@@ -90,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 bw.write(tv_password.getText().toString());
                 bw.close();
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.severe(e.getMessage());
             }
         }
     }
