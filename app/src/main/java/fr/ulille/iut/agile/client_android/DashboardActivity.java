@@ -243,12 +243,14 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
             @NonNull int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (
+                requestCode == MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION
+                        && grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {
                 onLocationChanged(location);
                 ActivitySwitcher.switchActivity(this, DashboardActivity.class, false);
                 updateGeoAndWeather();
-            }
         }
     }
 }
