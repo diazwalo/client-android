@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * Class qui permet à l'utilisateur de choisir plus finement de combien il veut vider la cuve
+ */
 public class WaterTriggerActivity extends AppCompatActivity {
 
     @Override

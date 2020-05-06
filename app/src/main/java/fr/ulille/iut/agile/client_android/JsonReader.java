@@ -10,6 +10,9 @@ import java.nio.charset.Charset;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class qui s'occupe du traitrement d'un fichier de type JSON
+ */
 public class JsonReader {
 
     private JsonReader() {

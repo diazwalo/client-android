@@ -2,6 +2,9 @@ package fr.ulille.iut.agile.client_android;
 
 import java.math.BigDecimal;
 
+/**
+ * Class qui retourne un chiffre avec X décimales
+ */
 public class DecimalTruncator {
 
     private DecimalTruncator() {

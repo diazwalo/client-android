@@ -1,35 +1,77 @@
 package fr.ulille.iut.agile.client_android;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
-
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.Looper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+import static android.os.Environment.getExternalStorageDirectory;
 
 /**
- * Class affichant l'icon de GreenWater pendant X secondes
+ * Class affichant l'icon de GreenWater redirigeant vers la page de login ou d'accueil
  */
 public class MainActivity extends AppCompatActivity {
-    private static final int SPLASH_TIME_OUT=1500;
+    String urlCompleted = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                ActivitySwitcher.switchActivity(MainActivity.this, LoginActivity.class, true);
+
+        checkAlreadyLogin();
+    }
+
+    private void checkAlreadyLogin() {
+        File root = new File(getExternalStorageDirectory(), "IsConnected");
+        if(root.exists()) {
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(root));
+                String login = br.readLine();
+                String password = br.readLine();
+                br.close();
+                this.VerifyLoginPassword(login, password);
+            }catch(Exception e) {
+                e.printStackTrace();
             }
-        }, SPLASH_TIME_OUT);
+        }else {
+            ActivitySwitcher.switchActivity(this, LoginActivity.class, true);
+        }
+    }
+
+    private void VerifyLoginPassword(String login, String password) {
+        if(login != null &&  password != null) {
+
+            urlCompleted = Connection.constructServerURL(new String[]{"authent", login, password});
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Looper.prepare();
+                    try {
+                        askServerLogin();
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Looper.loop();
+                }
+            }).start();
+        }
+    }
+
+    private void askServerLogin() throws IOException, JSONException {
+        JSONObject json = JsonReader.readJsonFromUrl(urlCompleted);
+        if(json != null && (boolean)json.get("authent")) {
+            ActivitySwitcher.switchActivity(this, HomeActivity.class, true);
+        }else {
+            ActivitySwitcher.switchActivity(this, LoginActivity.class, true);
+        }
     }
 
     /*public void startService() {

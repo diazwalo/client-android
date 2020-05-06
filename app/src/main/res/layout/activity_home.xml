@@ -70,4 +70,18 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/green_wall" />
 
+    <ImageView
+        android:id="@+id/home_button_logout"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/home_button_logout"
+        android:onClick="onClickLogout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="@drawable/log_out_icon" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,39 +53,51 @@
 
     <TextView
         android:id="@+id/dashboard_label_date"
-        android:layout_width="198dp"
-        android:layout_height="49dp"
+        android:layout_width="226dp"
+        android:layout_height="46dp"
         android:text="@string/dashboard_label_date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dashboard_image_meteo"
-        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintHorizontal_bias="0.439"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_button_cuve3"
-        app:layout_constraintVertical_bias="0.029" />
+        app:layout_constraintVertical_bias="0.034" />
 
     <TextView
         android:id="@+id/dashboard_label_ville"
-        android:layout_width="196dp"
-        android:layout_height="49dp"
+        android:layout_width="222dp"
+        android:layout_height="51dp"
         android:text="@string/dashboard_label_ville"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dashboard_image_meteo"
-        app:layout_constraintHorizontal_bias="0.246"
+        app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_button_cuve3"
-        app:layout_constraintVertical_bias="0.191" />
+        app:layout_constraintVertical_bias="0.194" />
 
     <ImageView
         android:id="@+id/dashboard_image_meteo"
-        android:layout_width="105dp"
-        android:layout_height="103dp"
+        android:layout_width="90dp"
+        android:layout_height="86dp"
         android:background="@color/colorAccent"
         android:contentDescription="@string/dashboard_image_meteo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintHorizontal_bias="0.909"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_button_cuve3"
-        app:layout_constraintVertical_bias="0.034" />
+        app:layout_constraintVertical_bias="0.117" />
+
+    <TextView
+        android:id="@+id/dashboard_label_meteo"
+        android:layout_width="87dp"
+        android:layout_height="18dp"
+        android:text="@string/dashboard_label_meteo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.901"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_button_cuve3"
+        app:layout_constraintVertical_bias="0.032" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

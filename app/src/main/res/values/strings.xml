@@ -28,4 +28,6 @@
     <string name="dashboard_label_date">Date : ...</string>
     <string name="dashboard_label_ville">Ville : ...</string>
     <string name="dashboard_image_meteo">Icone Meteo</string>
+    <string name="home_button_logout">Logout</string>
+    <string name="dashboard_label_meteo">Méteo :</string>
 </resources>

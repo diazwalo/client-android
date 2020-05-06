@@ -5,8 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.io.File;
+
+import static android.os.Environment.getExternalStorageDirectory;
+
 /**
  * Class qui sert à rediriger vers d'autre Activity lorsque l'utilisateur appuie sur un bouton
+ * Elle contient aussi un boutton logout pour se deconnecter
  */
 public class HomeActivity extends AppCompatActivity {
 
@@ -19,6 +24,12 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    public void onClickLogout(View view) {
+        File root = new File(getExternalStorageDirectory(), "IsConnected");
+        root.delete();
+        ActivitySwitcher.switchActivity(this, LoginActivity.class, true);
     }
 
     public void onClickTank(View view) {
