@@ -43,8 +43,8 @@ import java.util.Locale;
 public class DashboardActivity extends AppCompatActivity implements LocationListener {
     private Location location = null;
     public static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 1;
-    protected static final String[] NEEDED_PERMISSION = new String[] {Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE};
+    protected static final String[] NEEDED_PERMISSION = new String[] { Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE };
     private LocationManager locationManager;
     private String provider;
 
@@ -67,7 +67,8 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
 
         fetchLocation();
 
-        if (initLocation()) return;
+        if (initLocation())
+            return;
 
         updateGeoAndWeather();
     }
@@ -77,8 +78,10 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
 
         Criteria criteria = new Criteria();
         this.provider = locationManager.getBestProvider(criteria, false);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return true;
         }
         location = locationManager.getLastKnownLocation(provider);
@@ -92,8 +95,10 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     @Override
     protected void onResume() {
         super.onResume();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         locationManager.requestLocationUpdates(provider, 400, 1, this);
@@ -107,7 +112,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
 
     @Override
     public void onLocationChanged(Location location) {
-        //You had this as int. It is advised to have Lat/Loing as double.
+        // You had this as int. It is advised to have Lat/Loing as double.
         double lat = location.getLatitude();
         double lng = location.getLongitude();
 
@@ -119,9 +124,9 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
             String addressStr = address.get(0).getLocality();
             builder.append(addressStr);
 
-            finalAddress = builder.toString(); //This is the complete address.
+            finalAddress = builder.toString(); // This is the complete address.
 
-            addressField.setText(finalAddress); //This will display the final address.
+            addressField.setText(finalAddress); // This will display the final address.
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -131,14 +136,16 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     }
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {}
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
 
     @Override
-    public void onProviderEnabled(String provider) {}
+    public void onProviderEnabled(String provider) {
+    }
 
     @Override
-    public void onProviderDisabled(String provider) {}
-
+    public void onProviderDisabled(String provider) {
+    }
 
     public void onClicVider(View view) {
         ToastPrinter.printToast(this, "Not implemented yet...");
@@ -149,8 +156,9 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
         findWeather();
     }
 
-    public void findWeather(/*String paysVille*/) {
-        String urlJsonv2 = "http://api.openweathermap.org/data/2.5/forecast?q="+finalAddress+"&appid=9d629e64ec22ad1b004eb79cc0ec3895&cnt=5&mode=json&units=metric&lang=fr"; // Un "cnt" = 3 heures
+    public void findWeather(/* String paysVille */) {
+        String urlJsonv2 = "http://api.openweathermap.org/data/2.5/forecast?q=" + finalAddress
+                + "&appid=9d629e64ec22ad1b004eb79cc0ec3895&cnt=5&mode=json&units=metric&lang=fr"; // Un "cnt" = 3 heures
 
         new Thread(new Runnable() {
             @Override
@@ -158,7 +166,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
                 Looper.prepare();
                 try {
                     askMeteo(urlJsonv2);
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 Looper.loop();
@@ -169,52 +177,59 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
 
     private void askMeteo(String urlCompleted) throws IOException, JSONException {
         JSONObject json = JsonReader.readJsonFromUrl(urlCompleted);
-        if(json != null) {
+        if (json != null) {
             try {
                 JSONArray arrayOfDays = json.getJSONArray("list");
                 JSONObject dayOne = arrayOfDays.getJSONObject(0);
                 JSONObject meteo = dayOne.getJSONObject("main");
 
-                //Non utilisé
+                // Non utilisé
                 this.temp = meteo.getDouble("temp");
                 JSONArray array = dayOne.getJSONArray("weather");
                 JSONObject object = array.getJSONObject(0);
 
-                //Non utilisé
+                // Non utilisé
                 this.description = object.getString("description");
 
                 String icone = object.getString("icon");
 
                 Handler uiHandler = new Handler(Looper.getMainLooper());
-                uiHandler.post(new Runnable(){
+                uiHandler.post(new Runnable() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void run() {
                         Picasso.with(DashboardActivity.this)
                                 .load("http://openweathermap.org/img/wn/" + icone + "@2x.png").into(imageMeteo);
 
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E dd MMMM yyyy", new Locale("fr", "FR"));
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E dd MMMM yyyy",
+                                new Locale("fr", "FR"));
                         tvDate.setText(simpleDateFormat.format(new Date()));
                     }
                 });
-            }catch(JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             ToastPrinter.printToast(this, ("Error Network Connection"));
         }
     }
 
     private void fetchLocation() {
-        if (ContextCompat.checkSelfPermission(DashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(DashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+        if (ContextCompat.checkSelfPermission(DashboardActivity.this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(DashboardActivity.this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
                 new AlertDialog.Builder(this).setTitle("Autorisation de la localisation requise")
                         .setMessage("Nous avons besoin de cette permission pour vous aider")
-                        .setPositiveButton("Autoriser", (dialogInterface, i) -> ActivityCompat.requestPermissions(DashboardActivity.this,
-                               DashboardActivity.NEEDED_PERMISSION , MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION)
-                        ).setNegativeButton("Refuser", (dialogInterface, i) -> dialogInterface.dismiss()).create().show();
+                        .setPositiveButton("Autoriser",
+                                (dialogInterface, i) -> ActivityCompat.requestPermissions(DashboardActivity.this,
+                                        DashboardActivity.NEEDED_PERMISSION,
+                                        MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION))
+                        .setNegativeButton("Refuser", (dialogInterface, i) -> dialogInterface.dismiss()).create()
+                        .show();
             } else {
-                ActivityCompat.requestPermissions(DashboardActivity.this, DashboardActivity.NEEDED_PERMISSION, MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
+                ActivityCompat.requestPermissions(DashboardActivity.this, DashboardActivity.NEEDED_PERMISSION,
+                        MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
             }
         } else {
             ToastPrinter.printToast(this, "Vous êtes géolocalisé");
@@ -223,9 +238,10 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+            @NonNull int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 onLocationChanged(location);
                 ActivitySwitcher.switchActivity(this, DashboardActivity.class, false);
                 updateGeoAndWeather();
