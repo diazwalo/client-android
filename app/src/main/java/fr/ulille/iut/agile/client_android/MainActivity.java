@@ -1,6 +1,12 @@
 package fr.ulille.iut.agile.client_android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Looper;
 
@@ -15,17 +21,46 @@ import java.io.IOException;
 import static android.os.Environment.getExternalStorageDirectory;
 
 /**
- * Class affichant l'icon de GreenWater redirigeant vers la page de login ou d'accueil
+ * Class affichant l'icon de GreenWater redirigeant vers la page de login ou l'accueil
  */
 public class MainActivity extends AppCompatActivity {
     String urlCompleted = null;
+
+
+    private static final int STORAGE_READ_PERMISSION_CODE = 102;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        checkAlreadyLogin();
+        checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, STORAGE_READ_PERMISSION_CODE);
+    }
+
+    public void checkPermission(String permission, int requestCode) {
+        if (ContextCompat.checkSelfPermission(MainActivity.this, permission) == PackageManager.PERMISSION_DENIED) {
+
+            ActivityCompat.requestPermissions(MainActivity.this, new String[] {permission}, requestCode);
+        }
+        else {
+            ToastPrinter.printToast(MainActivity.this, "Permission accordée");
+            checkAlreadyLogin();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == STORAGE_READ_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                ToastPrinter.printToast(MainActivity.this, "Permission accordée");
+                checkAlreadyLogin();
+            }
+            else {
+                ToastPrinter.printToast(MainActivity.this, "Permission refusée");
+                finish();
+            }
+        }
     }
 
     private void checkAlreadyLogin() {

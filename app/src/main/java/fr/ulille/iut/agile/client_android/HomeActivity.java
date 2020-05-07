@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onClickLogout(View view) {
         File root = new File(getExternalStorageDirectory(), "IsConnected");
-        root.delete();
+        System.out.println("root.delet() : " +root.delete());
         ActivitySwitcher.switchActivity(this, LoginActivity.class, true);
     }
 

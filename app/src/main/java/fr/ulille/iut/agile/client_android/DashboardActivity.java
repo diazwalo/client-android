@@ -101,7 +101,10 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
                         Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        locationManager.requestLocationUpdates(provider, 400, 1, this);
+        //TODO : A REVOIR
+        if(provider != null) {
+            locationManager.requestLocationUpdates(provider, 400, 1, this);
+        }
     }
 
     @Override
@@ -113,25 +116,28 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     @Override
     public void onLocationChanged(Location location) {
         // You had this as int. It is advised to have Lat/Loing as double.
-        double lat = location.getLatitude();
-        double lng = location.getLongitude();
+        //TODO : A REVOIR
+        if(location != null) {
+            double lat = location.getLatitude();
+            double lng = location.getLongitude();
 
-        Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
-        StringBuilder builder = new StringBuilder();
-        try {
-            List<Address> address = geoCoder.getFromLocation(lat, lng, 1);
+            Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+            StringBuilder builder = new StringBuilder();
+            try {
+                List<Address> address = geoCoder.getFromLocation(lat, lng, 1);
 
-            String addressStr = address.get(0).getLocality();
-            builder.append(addressStr);
+                String addressStr = address.get(0).getLocality();
+                builder.append(addressStr);
 
-            finalAddress = builder.toString(); // This is the complete address.
+                finalAddress = builder.toString(); // This is the complete address.
 
-            addressField.setText(finalAddress); // This will display the final address.
+                addressField.setText(finalAddress); // This will display the final address.
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
         }
     }
 

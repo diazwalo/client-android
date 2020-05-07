@@ -1,7 +1,12 @@
 package fr.ulille.iut.agile.client_android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
@@ -31,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tv_password = null;
     private CheckBox cb_RememberMe = null;
 
+    private static final int STORAGE_WRITE_PERMISSION_CODE = 101;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,31 @@ public class LoginActivity extends AppCompatActivity {
         this.tv_login = (EditText)(findViewById(R.id.login));
         this.tv_password = (EditText)(findViewById(R.id.password));
         this.cb_RememberMe = (CheckBox)(findViewById(R.id.rememberMe));
+
+        checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, STORAGE_WRITE_PERMISSION_CODE);
+    }
+
+    public void checkPermission(String permission, int requestCode) {
+        if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED) {
+
+            ActivityCompat.requestPermissions(this, new String[] {permission}, requestCode);
+        }
+        else {
+            ToastPrinter.printToast(this, "Permission accordée");
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == STORAGE_WRITE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                ToastPrinter.printToast(this, "Permission accordée");
+            }
+            else {
+                ToastPrinter.printToast(this, "Permission refusée");
+            }
+        }
     }
 
     public void onClicSubmit(View view) {
