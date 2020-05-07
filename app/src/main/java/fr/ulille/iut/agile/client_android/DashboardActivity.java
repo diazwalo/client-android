@@ -43,9 +43,7 @@ import java.util.logging.Logger;
  */
 public class DashboardActivity extends AppCompatActivity implements LocationListener {
     private Location location = null;
-    public static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 1;
-    protected static final String[] NEEDED_PERMISSION = new String[] { Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE };
+    private static final int LOCATION_PERMISSION_CODE = 42;
     private LocationManager locationManager;
     private String provider;
 
@@ -57,8 +55,6 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     private TextView addressField;
     private TextView tvDate = null;
 
-    private static final Logger LOGGER = Logger.getLogger(TankActivity.class.getName());
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +64,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
         this.tvDate = (TextView) findViewById(R.id.dashboard_label_date);
         this.imageMeteo = findViewById(R.id.dashboard_image_meteo);
 
-        fetchLocation();
-
-        if (initLocation())
-            return;
-
-        updateGeoAndWeather();
+        checkPermission(Manifest.permission.ACCESS_FINE_LOCATION, LOCATION_PERMISSION_CODE);
     }
 
     private boolean initLocation() {
@@ -81,10 +72,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
 
         Criteria criteria = new Criteria();
         this.provider = locationManager.getBestProvider(criteria, false);
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return true;
         }
         location = locationManager.getLastKnownLocation(provider);
@@ -98,10 +86,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     @Override
     protected void onResume() {
         super.onResume();
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         //TODO : A REVOIR
@@ -113,7 +98,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     @Override
     protected void onPause() {
         super.onPause();
-        locationManager.removeUpdates(this);
+        //locationManager.removeUpdates(this);
     }
 
     @Override
@@ -165,7 +150,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
         findWeather();
     }
 
-    public void findWeather(/* String paysVille */) {
+    public void findWeather() {
         String urlJsonv2 = "http://api.openweathermap.org/data/2.5/forecast?q=" + finalAddress
                 + "&appid=9d629e64ec22ad1b004eb79cc0ec3895&cnt=5&mode=json&units=metric&lang=fr"; // Un "cnt" = 3 heures
 
@@ -176,7 +161,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
                 try {
                     askMeteo(urlJsonv2);
                 } catch (Exception e) {
-                    LOGGER.severe(e.getMessage());
+                    e.printStackTrace();
                 }
                 Looper.loop();
             }
@@ -216,47 +201,38 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
                     }
                 });
             } catch (JSONException e) {
-                LOGGER.severe(e.getMessage());
+                e.printStackTrace();
             }
         } else {
             ToastPrinter.printToast(this, ("Error Network Connection"));
         }
     }
 
-    private void fetchLocation() {
-        if (ContextCompat.checkSelfPermission(DashboardActivity.this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(DashboardActivity.this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                new AlertDialog.Builder(this).setTitle("Autorisation de la localisation requise")
-                        .setMessage("Nous avons besoin de cette permission pour vous aider")
-                        .setPositiveButton("Autoriser",
-                                (dialogInterface, i) -> ActivityCompat.requestPermissions(DashboardActivity.this,
-                                        DashboardActivity.NEEDED_PERMISSION,
-                                        MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION))
-                        .setNegativeButton("Refuser", (dialogInterface, i) -> dialogInterface.dismiss()).create()
-                        .show();
-            } else {
-                ActivityCompat.requestPermissions(DashboardActivity.this, DashboardActivity.NEEDED_PERMISSION,
-                        MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
-            }
-        } else {
-            ToastPrinter.printToast(this, "Vous êtes géolocalisé");
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void checkPermission(String permission, int requestCode) {
+        if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[] {permission}, requestCode);
+        }
+        else {
+            //ToastPrinter.printToast(this, "Localisation déjà accordée");
+            initLocation();
+            updateGeoAndWeather();
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-            @NonNull int[] grantResults) {
-        if (
-                requestCode == MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION
-                        && grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
-        ) {
-                onLocationChanged(location);
-                ActivitySwitcher.switchActivity(this, DashboardActivity.class, false);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //ToastPrinter.printToast(this, "Localisation accordée");
+                initLocation();
                 updateGeoAndWeather();
+            }
+            else {
+                //ToastPrinter.printToast(this, "Localisation refusée");
+            }
         }
     }
 }

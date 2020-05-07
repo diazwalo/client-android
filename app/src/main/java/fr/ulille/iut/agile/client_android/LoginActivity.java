@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[] {permission}, requestCode);
         }
         else {
-            ToastPrinter.printToast(this, "Permission accordée");
+            //ToastPrinter.printToast(this, "Permission déjà accordée");
         }
     }
 
@@ -67,10 +67,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == STORAGE_WRITE_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                ToastPrinter.printToast(this, "Permission accordée");
+                //ToastPrinter.printToast(this, "Permission accordée");
             }
             else {
-                ToastPrinter.printToast(this, "Permission refusée");
+                //ToastPrinter.printToast(this, "Permission refusée");
             }
         }
     }
