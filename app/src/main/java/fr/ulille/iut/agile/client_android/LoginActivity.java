@@ -21,13 +21,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import static android.os.Environment.getExternalStorageDirectory;
 
 /**
- * Class verifiant la saisie du login et du mot de passe de l'utilisateur
- * Soit il est redirigé vers l'accueil
- * Soit on lui affiche qu'il n'a pas reussi à s'authentifier
+ * Class verifiant la saisie du login et du mot de passe de l'utilisateur Soit
+ * il est redirigé vers l'accueil Soit on lui affiche qu'il n'a pas reussi à
+ * s'authentifier
  */
 public class LoginActivity extends AppCompatActivity {
     private String urlCompleted = null;
@@ -82,9 +83,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void VerifyLoginPassword(String login, String password) {
-        if(login != null &&  password != null) {
+        if (login != null && password != null) {
 
-            urlCompleted = Connection.constructServerURL(new String[]{"authent", login, password});
+            urlCompleted = Connection.constructServerURL(new String[] { "authent", login, password });
 
             new Thread(new Runnable() {
                 @Override
@@ -92,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                     Looper.prepare();
                     try {
                         askServerLogin();
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     Looper.loop();
@@ -103,26 +104,25 @@ public class LoginActivity extends AppCompatActivity {
 
     private void askServerLogin() throws IOException, JSONException {
         JSONObject json = JsonReader.readJsonFromUrl(urlCompleted);
-        if(json != null && (boolean)json.get("authent")) {
-            if(this.cb_RememberMe != null && this.cb_RememberMe.isChecked()) {
+        if (json != null && (boolean) json.get("authent")) {
+            if (this.cb_RememberMe != null && this.cb_RememberMe.isChecked()) {
                 rememberMe();
             }
             ActivitySwitcher.switchActivity(this, HomeActivity.class, true);
-        }else {
+        } else {
             ToastPrinter.printToast(this, getResources().getString(R.string.login_failed));
         }
     }
 
     private void rememberMe() {
         File root = new File(getExternalStorageDirectory(), "IsConnected");
-        if(!root.exists()) {
-            try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(root));
+        if (!root.exists()) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(root))) {
                 bw.write(tv_login.getText().toString());
                 bw.newLine();
                 bw.write(tv_password.getText().toString());
                 bw.close();
-            }catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

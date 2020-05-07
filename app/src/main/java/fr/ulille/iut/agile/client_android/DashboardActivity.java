@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 /**
  * Class Affichant les information sur la meteo, la geolocalisation
@@ -55,6 +56,8 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     private ImageView imageMeteo = null;
     private TextView addressField;
     private TextView tvDate = null;
+
+    private static final Logger LOGGER = Logger.getLogger(TankActivity.class.getName());
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -78,9 +81,9 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
 
         Criteria criteria = new Criteria();
         this.provider = locationManager.getBestProvider(criteria, false);
-        if (ActivityCompat.checkSelfPermission(this,
+        if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this,
+                && ContextCompat.checkSelfPermission(this,
                         Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return true;
         }
@@ -95,9 +98,9 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     @Override
     protected void onResume() {
         super.onResume();
-        if (ActivityCompat.checkSelfPermission(this,
+        if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this,
+                && ContextCompat.checkSelfPermission(this,
                         Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -173,7 +176,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
                 try {
                     askMeteo(urlJsonv2);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOGGER.severe(e.getMessage());
                 }
                 Looper.loop();
             }
@@ -213,7 +216,7 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
                     }
                 });
             } catch (JSONException e) {
-                e.printStackTrace();
+                LOGGER.severe(e.getMessage());
             }
         } else {
             ToastPrinter.printToast(this, ("Error Network Connection"));
@@ -246,12 +249,14 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
             @NonNull int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (
+                requestCode == MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION
+                        && grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {
                 onLocationChanged(location);
                 ActivitySwitcher.switchActivity(this, DashboardActivity.class, false);
                 updateGeoAndWeather();
-            }
         }
     }
 }
