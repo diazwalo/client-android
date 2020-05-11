@@ -8,9 +8,10 @@
 
     <Button
         android:id="@+id/home_button_cuve"
-        android:layout_width="361dp"
-        android:layout_height="122dp"
+        android:layout_width="360dp"
+        android:layout_height="90dp"
         android:background="@drawable/radius_input"
+        android:drawableStart="@drawable/home_cuve_button"
         android:drawableLeft="@drawable/home_cuve_button"
         android:drawablePadding="10dp"
         android:onClick="onClickTank"
@@ -18,16 +19,17 @@
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_header"
-        app:layout_constraintVertical_bias="0.11"
-        android:drawableStart="@drawable/home_cuve_button" />
+        app:layout_constraintVertical_bias="0.036" />
 
     <Button
         android:id="@+id/home_button_dashboard"
-        android:layout_width="361dp"
-        android:layout_height="122dp"
+        android:layout_width="360dp"
+        android:layout_height="90dp"
         android:background="@drawable/radius_input"
+        android:drawableStart="@drawable/home_dash_button"
         android:drawableLeft="@drawable/home_dash_button"
         android:drawablePadding="10dp"
         android:onClick="onClickDashboard"
@@ -35,15 +37,33 @@
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_button_carbon"
+        app:layout_constraintVertical_bias="0.163" />
+
+    <Button
+        android:id="@+id/home_button_carbon"
+        android:layout_width="360dp"
+        android:layout_height="90dp"
+        android:background="@drawable/radius_input"
+        android:drawableStart="@drawable/home_button_carbone"
+        android:drawableLeft="@drawable/home_button_carbone"
+        android:drawablePadding="10dp"
+        android:onClick="onClickCarbone"
+        android:text="@string/home_button_carbone"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_button_mur"
-        app:layout_constraintVertical_bias="0.426"
-        android:drawableStart="@drawable/home_dash_button" />
+        app:layout_constraintVertical_bias="0.076" />
 
     <Button
         android:id="@+id/home_button_mur"
-        android:layout_width="361dp"
-        android:layout_height="122dp"
+        android:layout_width="360dp"
+        android:layout_height="90dp"
         android:background="@drawable/radius_input"
         android:drawableStart="@drawable/home_conso_button"
         android:drawableLeft="@drawable/home_conso_button"
@@ -53,9 +73,10 @@
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_button_cuve"
-        app:layout_constraintVertical_bias="0.084" />
+        app:layout_constraintVertical_bias="0.057" />
 
     <ImageView
         android:id="@+id/home_header"

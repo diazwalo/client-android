@@ -35,7 +35,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.Logger;
 
 /**
  * Class Affichant les information sur la meteo, la geolocalisation

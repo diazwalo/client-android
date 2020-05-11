@@ -40,6 +40,10 @@ public class HomeActivity extends AppCompatActivity {
         ActivitySwitcher.switchActivity(this, AreaActivity.class, false);
     }
 
+    public void onClickCarbone(View view) {
+        ActivitySwitcher.switchActivity(this, CarboneActivity.class, false);
+    }
+
     public void onClickDashboard(View view) {
         ActivitySwitcher.switchActivity(this, DashboardActivity.class, false);
     }

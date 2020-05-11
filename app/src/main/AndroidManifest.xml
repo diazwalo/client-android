@@ -27,6 +27,7 @@
         <activity android:name=".DashboardActivity" />
         <activity android:name=".AreaActivity" />
         <activity android:name=".TankActivity" />
+        <activity android:name=".CarboneActivity" />
         <activity android:name=".HomeActivity" />
         <activity
             android:name=".LoginActivity"

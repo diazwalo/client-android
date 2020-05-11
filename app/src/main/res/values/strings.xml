@@ -30,4 +30,9 @@
     <string name="dashboard_image_meteo">Icone Meteo</string>
     <string name="home_button_logout">Logout</string>
     <string name="dashboard_label_meteo">Méteo :</string>
+    <string name="resultat_carbone">"Résultat (CO2) : "</string>
+    <string name="resultat_oxygen">"Résultat (O2) : "</string>
+    <string name="home_button_carbone">Calcule de l\'émission de CO2 et production d\'O2</string>
+    <string name="carbone_label_surface"> Surface du mur (m2) </string>
+    <string name="invalid_parameters">Invalid parameters</string>
 </resources>

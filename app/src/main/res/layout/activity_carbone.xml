@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context="fr.ulille.iut.agile.client_android.TankActivity">
 
+    <TextView
+        android:id="@+id/resultat_carbone_carbone"
+        android:layout_width="375dp"
+        android:layout_height="46dp"
+        android:background="@drawable/radius_input"
+        android:gravity="center"
+        android:text="@string/resultat_carbone"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_button_carbone"
+        app:layout_constraintVertical_bias="0.155" />
+
     <Button
         android:id="@+id/carbone_button_calculer"
         android:layout_width="151dp"
@@ -20,8 +36,8 @@
         app:layout_constraintCircleRadius="@dimen/activity_vertical_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tank_input_ville"
-        app:layout_constraintVertical_bias="0.28" />
+        app:layout_constraintTop_toBottomOf="@+id/carbone_input_conso"
+        app:layout_constraintVertical_bias="0.432" />
 
     <EditText
         android:id="@+id/carbone_input_conso"
@@ -40,42 +56,11 @@
         app:layout_constraintTop_toBottomOf="@+id/carbone_label_conso"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/tank_input_ville"
-        android:layout_width="321dp"
-        android:layout_height="41dp"
-        android:autofillHints=""
-        android:background="@drawable/radius_input"
-        android:ems="10"
-        android:hint="@string/hint_text"
-        android:inputType="textPersonName"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/area_label_ville"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/area_label_ville"
-        android:layout_width="111dp"
-        android:layout_height="23dp"
-        android:text="@string/tank_label_ville"
-        android:textColor="#73C0E0"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.146"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carbone_input_conso"
-        app:layout_constraintVertical_bias="0.083" />
-
     <TextView
         android:id="@+id/carbone_label_conso"
         android:layout_width="253dp"
         android:layout_height="24dp"
-        android:text="@string/tank_label_conso"
+        android:text="@string/carbone_label_surface"
         android:textColor="#73C0E0"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +68,7 @@
         app:layout_constraintHorizontal_bias="0.278"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultat_carbone_oxygen"
-        app:layout_constraintVertical_bias="0.119" />
+        app:layout_constraintVertical_bias="0.214" />
 
     <ImageView
         android:id="@+id/home_header2"
@@ -103,8 +88,8 @@
         android:layout_width="353dp"
         android:layout_height="75dp"
         android:clickable="false"
-        android:drawableStart="@drawable/home_cuve_button"
-        android:drawableLeft="@drawable/home_cuve_button"
+        android:drawableStart="@drawable/home_button_carbone"
+        android:drawableLeft="@drawable/home_button_carbone"
         android:drawablePadding="10dp"
         android:text="@string/home_button_cuve"
         android:textColor="@android:color/black"
@@ -117,18 +102,18 @@
 
     <TextView
         android:id="@+id/resultat_carbone_oxygen"
-        android:layout_width="266dp"
+        android:layout_width="375dp"
         android:layout_height="46dp"
         android:background="@drawable/radius_input"
         android:gravity="center"
-        android:text="@string/label_res"
+        android:text="@string/resultat_oxygen"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_button_carbone"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintTop_toBottomOf="@+id/resultat_carbone_carbone"
+        app:layout_constraintVertical_bias="0.07" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
