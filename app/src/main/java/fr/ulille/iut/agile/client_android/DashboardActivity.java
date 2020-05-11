@@ -2,7 +2,6 @@ package fr.ulille.iut.agile.client_android;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -23,6 +22,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -53,6 +53,11 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
     private ImageView imageMeteo = null;
     private TextView addressField;
     private TextView tvDate = null;
+    private ProgressBar pbBackGraph = null;
+    private static ProgressBar pbForeGraph = null;
+    private static TextView tvLabelGraph = null;
+
+    public static int percent_tank_filling= (int)(Math.random() * ((100 - 0) + 1));
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -62,8 +67,17 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
         this.addressField = findViewById(R.id.dashboard_label_ville);
         this.tvDate = (TextView) findViewById(R.id.dashboard_label_date);
         this.imageMeteo = findViewById(R.id.dashboard_image_meteo);
+        this.pbBackGraph = (ProgressBar)findViewById(R.id.dashboard_progressbar_background);
+        this.pbForeGraph = (ProgressBar)findViewById(R.id.dashboard_progressbar_foreground);
+        this.tvLabelGraph = (TextView)findViewById(R.id.dashboard_label_graph);
+        this.initPercentTankFilling();
 
         checkPermission(Manifest.permission.ACCESS_FINE_LOCATION, LOCATION_PERMISSION_CODE);
+    }
+
+    public static void initPercentTankFilling() {
+        DashboardActivity.tvLabelGraph.setText(DashboardActivity.percent_tank_filling + " %");
+        DashboardActivity.pbForeGraph.setProgress(DashboardActivity.percent_tank_filling);
     }
 
     private boolean initLocation() {
@@ -138,10 +152,6 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
 
     @Override
     public void onProviderDisabled(String provider) {
-    }
-
-    public void onClicVider(View view) {
-        ToastPrinter.printToast(this, "Not implemented yet...");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -232,6 +242,20 @@ public class DashboardActivity extends AppCompatActivity implements LocationList
             else {
                 //ToastPrinter.printToast(this, "Localisation refusée");
             }
+        }
+    }
+
+    public void onClicVider(View view) {
+        //ToastPrinter.printToast(this, "Not implemented yet...");
+        /*DashboardActivity.percent_tank_filling -= 25;
+        if(DashboardActivity.percent_tank_filling < 0) {
+            DashboardActivity.percent_tank_filling = 0;
+        }
+        this.initPercentTankFilling();*/
+        if(DashboardActivity.percent_tank_filling <= 0 ) {
+            ToastPrinter.printToast(this, "Cuve déjà vide...");
+        }else {
+            DialogAlertor.makeDialogAlertForTankFilling(this);
         }
     }
 }

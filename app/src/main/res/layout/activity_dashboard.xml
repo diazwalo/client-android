@@ -49,31 +49,32 @@
         app:layout_constraintCircleRadius="@dimen/activity_vertical_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_label_ville" />
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_progressbar_background"
+        app:layout_constraintVertical_bias="0.134" />
 
     <TextView
         android:id="@+id/dashboard_label_date"
-        android:layout_width="226dp"
-        android:layout_height="46dp"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
         android:text="@string/dashboard_label_date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dashboard_image_meteo"
-        app:layout_constraintHorizontal_bias="0.439"
+        app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_button_cuve3"
         app:layout_constraintVertical_bias="0.034" />
 
     <TextView
         android:id="@+id/dashboard_label_ville"
-        android:layout_width="222dp"
-        android:layout_height="51dp"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
         android:text="@string/dashboard_label_ville"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dashboard_image_meteo"
-        app:layout_constraintHorizontal_bias="0.414"
+        app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_button_cuve3"
-        app:layout_constraintVertical_bias="0.194" />
+        app:layout_constraintVertical_bias="0.196" />
 
     <ImageView
         android:id="@+id/dashboard_image_meteo"
@@ -99,5 +100,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_button_cuve3"
         app:layout_constraintVertical_bias="0.032" />
+
+    <!-- Doughnut chart starts here -->
+        <!-- ProgressBar that represents a total of 100% -->
+
+    <!-- ProgressBar that represents a chart slice, where "android:progress" is the % value of the slice -->
+
+    <!-- The text that goes in a center of the chart -->
+
+    <ProgressBar
+        android:id="@+id/dashboard_progressbar_background"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="100"
+        android:progressDrawable="@drawable/stats_full"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_label_ville"
+        app:layout_constraintVertical_bias="0.065" />
+
+    <ProgressBar
+        android:id="@+id/dashboard_progressbar_foreground"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="75"
+        android:progressDrawable="@drawable/stats_progress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_label_ville"
+        app:layout_constraintVertical_bias="0.065" />
+
+    <TextView
+        android:id="@+id/dashboard_label_graph"
+        android:layout_width="106dp"
+        android:layout_height="25dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/dashboard_progressbar_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dashboard_progressbar_background" />
+
+    <!-- Doughnut chart ends here -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
