@@ -113,6 +113,7 @@
         android:layout_width="167dp"
         android:layout_height="36dp"
         android:layout_marginTop="6dp"
+        android:onClick="onClicccountSettings"
         android:text="Option du compte"
         android:textColor="@android:color/secondary_text_light_nodisable"
         android:textColorHighlight="@android:color/secondary_text_light_nodisable"
